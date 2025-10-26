@@ -1,7 +1,7 @@
 class TrelloCli < Formula
-  desc "A comprehensive Trello CLI tool optimized for LLM integration"
+  desc "A comprehensive Trello CLI tool for humands and LLMs"
   homepage "https://trello-cli.netlify.app"
-  url "https://github.com/danbruder/trello-cli/archive/v1.0.1.tar.gz"
+  url "https://github.com/danbruder/trello-cli/archive/v1.0.4.tar.gz"
   sha256 ""
   license "MIT"
   head "https://github.com/danbruder/trello-cli.git", branch: "main"
