@@ -5,7 +5,7 @@ class TrelloCli < Formula
   license "MIT"
   head "https://github.com/danbruder/trello-cli.git", branch: "main"
 
-  depends_on :macos
+  # Support macOS and Linux with prebuilt binaries
 
   on_macos do
     if Hardware::CPU.arm?
@@ -14,6 +14,20 @@ class TrelloCli < Formula
     else
       url "https://github.com/danbruder/trello-cli/releases/download/v1.0.4/trello-cli-darwin-amd64"
       sha256 "887ee3d74ba293b0dc9975f0bd0a097baf6cb97752fd9214091dcd64ad9b5cb3"
+    end
+
+    def install
+      bin.install Dir["trello-cli*"].first => "trello-cli"
+    end
+  end
+
+  on_linux do
+    if Hardware::CPU.arm?
+      url "https://github.com/danbruder/trello-cli/releases/download/v1.0.4/trello-cli-linux-arm64"
+      sha256 "4ed07ccb8689357dd78e5cee4f41750c17412c0330371835ccf486ae6fb68b07"
+    else
+      url "https://github.com/danbruder/trello-cli/releases/download/v1.0.4/trello-cli-linux-amd64"
+      sha256 "22b04c235a9aa69a6593454d2c2236742052c1ee445153f36dcfc6375749d48f"
     end
 
     def install
