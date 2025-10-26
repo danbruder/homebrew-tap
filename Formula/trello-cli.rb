@@ -1,16 +1,24 @@
 class TrelloCli < Formula
   desc "A comprehensive Trello CLI tool for humands and LLMs"
   homepage "https://trello-cli.netlify.app"
-  url "https://github.com/danbruder/trello-cli/archive/v1.0.4.tar.gz"
-  sha256 ""
+  version "1.0.4"
   license "MIT"
   head "https://github.com/danbruder/trello-cli.git", branch: "main"
 
-  depends_on "go" => :build
+  depends_on :macos
 
-  def install
-    system "go", "build", "-ldflags", "-s -w", "-o", "trello-cli", "."
-    bin.install "trello-cli"
+  on_macos do
+    if Hardware::CPU.arm?
+      url "https://github.com/danbruder/trello-cli/releases/download/v1.0.4/trello-cli-darwin-arm64"
+      sha256 "f291f26c14cb5a4fee9d6b2c7b70538d6230aebd6764e23b80bb6e23a035f97b"
+    else
+      url "https://github.com/danbruder/trello-cli/releases/download/v1.0.4/trello-cli-darwin-amd64"
+      sha256 "887ee3d74ba293b0dc9975f0bd0a097baf6cb97752fd9214091dcd64ad9b5cb3"
+    end
+
+    def install
+      bin.install Dir["trello-cli*"].first => "trello-cli"
+    end
   end
 
   test do
